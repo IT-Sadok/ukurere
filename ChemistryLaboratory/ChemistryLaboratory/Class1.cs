@@ -4,8 +4,9 @@ namespace MyApp.Class
 {
     public class ChemistyLaboratory
     {
-        private int maxSubstances;
+        public int maxSubstances;
         public int currentSubstancesCount;
+        public string command;
 
         public ChemistyLaboratory(int max)
         {
@@ -27,6 +28,25 @@ namespace MyApp.Class
             {
                 currentSubstancesCount--;
             }
+
         }
+
+        public string ChangeOnStage(string commad)
+        {
+            if (command == "add")
+            {
+                Add();
+            }
+            else if (command == "div")
+            {
+                Div();
+            }
+            else
+            {
+                return ("Your command is incorrect.");
+            }
+            return ("Current number of substances: " + currentSubstancesCount);
+        }
+
     }
 }
