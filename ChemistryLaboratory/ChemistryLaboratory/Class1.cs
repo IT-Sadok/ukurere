@@ -7,6 +7,8 @@ namespace MyApp.Class
         public int maxSubstances;
         public int currentSubstancesCount;
         public string command;
+        public bool MaxLimitReachedException = false, ImposibleLimitReached = false;
+        public string Messenge;
 
         public ChemistyLaboratory(int max)
         {
@@ -20,6 +22,10 @@ namespace MyApp.Class
             {
                 currentSubstancesCount++;
             }
+            else
+            {
+                MaxLimitReachedException = true;
+            }
         }
 
         public void Div()
@@ -28,11 +34,18 @@ namespace MyApp.Class
             {
                 currentSubstancesCount--;
             }
-
+            else
+            {
+                ImposibleLimitReached = true;
+            }
         }
 
         public string ChangeOnStage(string commad)
         {
+            Messenge = "";
+            MaxLimitReachedException = false;  
+            ImposibleLimitReached = false;
+
             if (command == "add")
             {
                 Add();
@@ -43,9 +56,20 @@ namespace MyApp.Class
             }
             else
             {
-                return ("Your command is incorrect.");
+                Messenge = "Your command is incorrect.";
             }
-            return ("Current number of substances: " + currentSubstancesCount);
+
+            if (MaxLimitReachedException)
+            {
+                Messenge = "Reach the maximum limit. You can not add substances on the Stage. \n";
+            }
+            else if (ImposibleLimitReached)
+            {
+                Messenge = "There are no substances on the Stage. ";
+            }
+
+            Messenge += ("Current number of substances: " + currentSubstancesCount);
+            return Messenge;
         }
 
     }
