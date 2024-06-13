@@ -4,10 +4,14 @@ Console.WriteLine("Please enter the maximum number of substances on the shelf:")
 string input = Console.ReadLine();
 int maxSubstances;
 
-if (!int.TryParse(input, out maxSubstances))
+input = Console.ReadLine();
+
+while (!int.TryParse(input, out maxSubstances))
 {
     Console.WriteLine("Invalid number. Please restart the program and enter a valid number.");
+    input = Console.ReadLine();
 }
+
 ChemistyLaboratory lab = new ChemistyLaboratory(maxSubstances);
 
 while (true)
