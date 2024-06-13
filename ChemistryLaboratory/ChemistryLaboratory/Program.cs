@@ -1,24 +1,59 @@
 using MyApp.Class;
+using System;
 
-Console.WriteLine("Please enter the maximum number of substances on the shelf:");
-string input = Console.ReadLine();
-int maxSubstances;
-
-input = Console.ReadLine();
-
-while (!int.TryParse(input, out maxSubstances))
+namespace MyApp
 {
-    Console.WriteLine("Invalid number. Please restart the program and enter a valid number.");
-    input = Console.ReadLine();
-}
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please enter the maximum number of substances on the shelf:");
+            string input = Console.ReadLine();
+            int maxSubstances;
 
-ChemistyLaboratory lab = new ChemistyLaboratory(maxSubstances);
+            while (!int.TryParse(input, out maxSubstances))
+            {
+                Console.WriteLine("Invalid number. Please restart the program and enter a valid number.");
+                input = Console.ReadLine();
+            }
 
-while (true)
-{
-    Console.WriteLine("Enter command (add/div):");
+            ChemistyLaboratory lab = new ChemistyLaboratory(maxSubstances);
 
-    lab.command = Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("Enter command (add/div):");
 
-    Console.WriteLine(lab.ChangeOnStage(lab.command));
+                lab.command = Console.ReadLine();
+
+                if (lab.command == "add")
+                {
+                    try
+                    {
+                        lab.Add();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                else if (lab.command == "div")
+                {
+                    try
+                    {
+                        lab.Div();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Your command is incorrect.");
+                }
+
+                Console.WriteLine("Current number of substances: " + lab.currentSubstancesCount);
+            }
+        }
+    }
 }
