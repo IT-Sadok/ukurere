@@ -7,8 +7,6 @@ namespace MyApp.Class
         public int maxSubstances;
         public int currentSubstancesCount;
         public string command;
-        public bool MaxLimitReachedException = false, ImposibleLimitReached = false;
-        public string Messenge;
 
         public ChemistyLaboratory(int max)
         {
@@ -18,59 +16,25 @@ namespace MyApp.Class
 
         public void Add()
         {
-            if (currentSubstancesCount < maxSubstances)
+            if(currentSubstancesCount == maxSubstances)
             {
-                currentSubstancesCount++;
+                throw new Exception("Reach the maximum limit. You can not add substances on the Stage. \n");
             }
             else
             {
-                MaxLimitReachedException = true;
+                currentSubstancesCount++;
             }
         }
 
         public void Div()
         {
-            if (currentSubstancesCount > 0)
+            if (currentSubstancesCount == 0)
+            {
+                throw new Exception("There are no substances on the Stage. \n");
+            }
+            else
             {
                 currentSubstancesCount--;
             }
-            else
-            {
-                ImposibleLimitReached = true;
-            }
         }
-
-        public string ChangeOnStage(string commad)
-        {
-            Messenge = "";
-            MaxLimitReachedException = false;  
-            ImposibleLimitReached = false;
-
-            if (command == "add")
-            {
-                Add();
-            }
-            else if (command == "div")
-            {
-                Div();
-            }
-            else
-            {
-                Messenge = "Your command is incorrect.";
-            }
-
-            if (MaxLimitReachedException)
-            {
-                Messenge = "Reach the maximum limit. You can not add substances on the Stage. \n";
-            }
-            else if (ImposibleLimitReached)
-            {
-                Messenge = "There are no substances on the Stage. ";
-            }
-
-            Messenge += ("Current number of substances: " + currentSubstancesCount);
-            return Messenge;
-        }
-
-    }
 }
