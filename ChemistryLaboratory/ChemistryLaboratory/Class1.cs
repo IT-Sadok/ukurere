@@ -1,5 +1,6 @@
 using System;
 
+
 namespace MyApp.Class
 {
     public class ChemistyLaboratory
@@ -16,9 +17,9 @@ namespace MyApp.Class
 
         public void Add()
         {
-            if(currentSubstancesCount == maxSubstances)
+            if (currentSubstancesCount == maxSubstances)
             {
-                throw new Exception("Reach the maximum limit. You can not add substances on the Stage. \n");
+                throw new MaxLimitExceededException();
             }
             else
             {
@@ -30,11 +31,12 @@ namespace MyApp.Class
         {
             if (currentSubstancesCount == 0)
             {
-                throw new Exception("There are no substances on the Stage. \n");
+                throw new NoSubstancesException();
             }
             else
             {
                 currentSubstancesCount--;
             }
         }
+    }
 }
