@@ -31,7 +31,7 @@ namespace MyApp
                     {
                         lab.Add();
                     }
-                    catch (Exception e)
+                    catch (MaxLimitExceededException e)
                     {
                         Console.WriteLine(e.Message);
                     }
@@ -42,7 +42,7 @@ namespace MyApp
                     {
                         lab.Div();
                     }
-                    catch (Exception e)
+                    catch (NoSubstancesException e)
                     {
                         Console.WriteLine(e.Message);
                     }
