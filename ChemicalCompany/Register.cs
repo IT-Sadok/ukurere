@@ -1,11 +1,10 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace ChemicalCompany
 {
     public class Substance
     {
         public int Ip { get; set; }
         public string NameOfSubstance { get; set; }
+        public SubstanceType Type { get; set; }
 
         public enum SubstanceType
         {
@@ -15,11 +14,11 @@ namespace ChemicalCompany
             Salt
         }
 
-        public Substance (int Ip, string NameOfSubstance, Enum SubstanceType)
+        public Substance(int ip, string nameOfSubstance, SubstanceType type)
         {
-            Ip = Ip;
-            NameOfSubstance = NameOfSubstance;
-            SubstanceType = SubstanceType;
+            Ip = ip;
+            NameOfSubstance = nameOfSubstance;
+            Type = type;
         }
     }
 }
