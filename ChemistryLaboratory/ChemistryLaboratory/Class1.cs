@@ -5,17 +5,7 @@ namespace MyApp.Class
 {
     public class ChemistyLaboratory
     {
-        public int maxSubstances;
-        public int currentSubstancesCount;
-        public string command;
-
-        public ChemistyLaboratory(int max)
-        {
-            maxSubstances = max;
-            currentSubstancesCount = 0;
-        }
-
-        public void Add()
+        public void Add(int maxSubstances, ref int currentSubstancesCount)
         {
             if (currentSubstancesCount == maxSubstances)
             {
@@ -27,7 +17,7 @@ namespace MyApp.Class
             }
         }
 
-        public void Div()
+        public void Div(ref int currentSubstancesCount)
         {
             if (currentSubstancesCount == 0)
             {
