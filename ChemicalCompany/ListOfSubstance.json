@@ -1,5 +1,5 @@
-{
-	"Id": "001"
-	"NameOfSubstance": "H20",
-	"SubstanceType": "oxid"
-}
+[
+    { "Ip": 001, "NameOfSubstance": "HCl", "Type": "Acid" },
+    { "Ip": 002, "NameOfSubstance": "NaOH", "Type": "Base" },
+    { "Ip": 003, "NameOfSubstance": "CO2", "Type": "Oxide" }
+]
