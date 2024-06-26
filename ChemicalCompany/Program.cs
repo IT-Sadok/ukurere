@@ -1,39 +1,77 @@
-using System.Data;
+using ChemicalCompany;
 using System.Text.Json;
 
-namespace ChemicalCompany
+class Program
 {
-    public static class Options
+    static void Main()
     {
-        public static void Add(List<Substance> listOfSubstance, string filePath, Substance newSubstance)
+        string inputFilePath = "ListOfSubstance.json";
+        string command;
+
+        try
         {
-                listOfSubstance.Add(newSubstance);
+            string jsonString = File.ReadAllText(inputFilePath);
 
-                string jsonString = JsonSerializer.Serialize(listOfSubstance, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, jsonString);
-            
-        }
+            List<Substance> listOfSubstance = JsonSerializer.Deserialize<List<Substance>>(jsonString) ?? new List<Substance>();
 
-        public static void Remove(List<Substance> listOfSubstance, string filePath, int ip)
-        {
-            Substance substanceToRemove = listOfSubstance.Find(s => s.Ip == ip);
-
-            if (substanceToRemove != null)
+            while (true)
             {
-                listOfSubstance.Remove(substanceToRemove);
+                Console.WriteLine("Enter command (Add/Remove/Current):");
+                command = Console.ReadLine();
 
-                string jsonString = JsonSerializer.Serialize(listOfSubstance, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, jsonString);
+                if (command == "Add")
+                {
+                    int ip = int.Parse(Console.ReadLine());
+                    string nameOfSubstance = Console.ReadLine();
+                    string typeInput = Console.ReadLine();
+
+                    Substance.SubstanceType type;
+                    if (!Enum.TryParse(typeInput, true, out type))
+                    {
+                        Console.WriteLine("Invalid type entered. Please try again.");
+                        continue;
+                    }
+
+                    try
+                    {
+                        Options.Add(listOfSubstance, inputFilePath, new Substance(ip, nameOfSubstance, type));
+
+                        Console.WriteLine("Substance added successfully.");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error while adding substance.");
+                    }
+                }
+                else if (command == "Remove")
+                {
+                    int ip = int.Parse(Console.ReadLine());
+
+                    try
+                    {
+                        Options.Remove(listOfSubstance, inputFilePath, ip);
+
+                        Console.WriteLine("Ok.");
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Substance with the given IP not found.");
+                    }
+                }
+                else if (command == "Current")
+                {
+                    Console.WriteLine(Options.Current(listOfSubstance));
+                }
+                else
+                {
+                    Console.WriteLine("Your command is incorrect. Please try again.");
+                }
             }
-            else
-            {
-                throw new Exception(); 
-            }            
         }
-
-        public static int Current(List<Substance> listOfSubstance)
+        catch (Exception e)
         {
-            return listOfSubstance.Count;
+            Console.WriteLine("Something is wrong. Try again.");
         }
     }
 }
