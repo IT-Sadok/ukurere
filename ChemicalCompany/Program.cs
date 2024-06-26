@@ -1,24 +1,39 @@
-﻿using ChemicalCompany;
+using System.Data;
 using System.Text.Json;
 
-class Program
+namespace ChemicalCompany
 {
-    static void Main()
+    public static class Options
     {
-        string inputFilePath = "ListOfSubstance.json";
-
-        try
+        public static void Add(List<Substance> listOfSubstance, string filePath, Substance newSubstance)
         {
-            string jsonString = File.ReadAllText(inputFilePath);
+                listOfSubstance.Add(newSubstance);
 
-            List<Substance> listOfSubstance = JsonSerializer.Deserialize<List<Substance>>(jsonString);
-
-            listOfSubstance.Add(new Substance(123, "H2O", Substance.SubstanceType.Base));
-
+                string jsonString = JsonSerializer.Serialize(listOfSubstance, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, jsonString);
+            
         }
-        catch (Exception e)
+
+        public static void Remove(List<Substance> listOfSubstance, string filePath, int ip)
         {
-            Console.WriteLine("Something is wrong. Correct errors and try again.");
+            Substance substanceToRemove = listOfSubstance.Find(s => s.Ip == ip);
+
+            if (substanceToRemove != null)
+            {
+                listOfSubstance.Remove(substanceToRemove);
+
+                string jsonString = JsonSerializer.Serialize(listOfSubstance, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, jsonString);
+            }
+            else
+            {
+                throw new Exception(); 
+            }            
+        }
+
+        public static int Current(List<Substance> listOfSubstance)
+        {
+            return listOfSubstance.Count;
         }
     }
 }
