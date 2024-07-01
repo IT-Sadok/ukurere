@@ -1,0 +1,68 @@
+[
+    {
+        "Identifier": 1,
+        "Title": "Tini zabutykh predkiv",
+        "Author": "Mykhailo Kotsiubynskyi",
+        "PublicationYear": 1911
+    },
+    {
+        "Identifier": 2,
+        "Title": "Tyhrolovy",
+        "Author": "Ivan Bahrianyi",
+        "PublicationYear": 1944
+    },
+    {
+        "Identifier": 3,
+        "Title": "Misto",
+        "Author": "Valerian Pidmohylnyi",
+        "PublicationYear": 1928
+    },
+    {
+        "Identifier": 4,
+        "Title": "Marusia Churai",
+        "Author": "Lina Kostenko",
+        "PublicationYear": 1979
+    },
+    {
+        "Identifier": 5,
+        "Title": "Zacharovana Desna",
+        "Author": "Oleksandr Dovzhenko",
+        "PublicationYear": 1956
+    },
+    {
+        "Identifier": 6,
+        "Title": "Tini viiny",
+        "Author": "Yurii Yanovskyi",
+        "PublicationYear": 1931
+    },
+    {
+        "Identifier": 7,
+        "Title": "Instytutka",
+        "Author": "Marko Vovchok",
+        "PublicationYear": 1905
+    },
+    {
+        "Identifier": 8,
+        "Title": "Ia (Romantyka)",
+        "Author": "Mykola Khvyliovyi",
+        "PublicationYear": 1924
+    },
+    {
+        "Identifier": 9,
+        "Title": "Zakhar Berkut",
+        "Author": "Ivan Franko",
+        "PublicationYear": 1883
+    },
+    {
+        "Identifier": 10,
+        "Title": "Lisova pisnia",
+        "Author": "Lesia Ukrainka",
+        "PublicationYear": 1911
+    },
+    {
+        "Identifier": 11,
+        "Title": "Kobzar",
+        "Author": "Taras Shevchenko",
+        "PublicationYear": 1840
+    }
+]
