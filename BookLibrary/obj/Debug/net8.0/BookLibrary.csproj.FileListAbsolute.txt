@@ -1,0 +1,14 @@
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.AssemblyInfoInputs.cache
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.AssemblyInfo.cs
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\bin\Debug\net8.0\BookLibrary.exe
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\bin\Debug\net8.0\BookLibrary.deps.json
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\bin\Debug\net8.0\BookLibrary.runtimeconfig.json
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\bin\Debug\net8.0\BookLibrary.dll
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\bin\Debug\net8.0\BookLibrary.pdb
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.dll
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\refint\BookLibrary.dll
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.pdb
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\BookLibrary.genruntimeconfig.cache
+C:\Users\Ukurere\Documents\Programming\Lessons\BookLibrary\BookLibrary\obj\Debug\net8.0\ref\BookLibrary.dll
