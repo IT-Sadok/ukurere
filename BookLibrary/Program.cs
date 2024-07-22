@@ -1,18 +1,16 @@
-﻿using BookLibrary;
-using System.Text.Json;
+using BookLibrary;
 
 class Program
 {
     static void Main()
     {
         string inputFilePath = "Library.json";
+        string outputFilePath = "UpdatedLibrary.json";
         string command;
 
         try
         {
-            string jsonString = File.ReadAllText(inputFilePath);
-
-            List<Book> ListOfBooks = JsonSerializer.Deserialize<List<Book>>(jsonString) ?? new List<Book>();
+            List<Book> ListOfBooks = Read.LoadBooks(inputFilePath);
 
             Console.WriteLine("You can do: \n1. Add a book\n2. Remove a book by identifier\n3. Search for books by author\n4. Display books sorted by publication year\n5. Save data to a file and load data from a file.\n");
 
@@ -31,13 +29,12 @@ class Program
 
                     try
                     {
-                        Options.AddBook(ListOfBooks, Identifier, Title, Author, PublicationYear);
-
+                        Commands.AddBook(ListOfBooks, Identifier, Title, Author, PublicationYear);
                         Console.WriteLine("Book is added. Everything is good!");
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Error while adding book.");
+                        Console.WriteLine("Error while adding book: " + e.Message);
                     }
                 }
                 else if (command == "2")
@@ -46,27 +43,31 @@ class Program
 
                     try
                     {
-                        Options.RemoveBookByIdentifier(ListOfBooks, Identifier);
-
+                        Commands.RemoveBookByIdentifier(ListOfBooks, Identifier);
                         Console.WriteLine("Book is removed.");
-                        Options.DisplayBooks(ListOfBooks);
+                        Commands.DisplayBooks(ListOfBooks);
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Book with the given Identifier not found.");
+                        Console.WriteLine("Book with the given Identifier not found: " + e.Message);
                     }
                 }
                 else if (command == "3")
                 {
                     string Author = Console.ReadLine();
 
-                    var FoundBooks = Options.SearchForBooksByAuthor(ListOfBooks, Author);
-                    Options.DisplayBooks(FoundBooks);
+                    var FoundBooks = Commands.SearchForBooksByAuthor(ListOfBooks, Author);
+                    Commands.DisplayBooks(FoundBooks);
                 }
                 else if (command == "4")
                 {
-                    var SortedBooks = Options.SortedByPublicationYear(ListOfBooks);
-                    Options.DisplayBooks(SortedBooks);
+                    var SortedBooks = Commands.SortedByPublicationYear(ListOfBooks);
+                    Commands.DisplayBooks(SortedBooks);
+                }
+                else if (command == "5")
+                {
+                    Commands.SaveBooksToFile(ListOfBooks, outputFilePath);
+                    Console.WriteLine("Data saved to file.");
                 }
                 else
                 {
@@ -76,7 +77,7 @@ class Program
         }
         catch (Exception e)
         {
-            Console.WriteLine("Something is wrong. Try again.");
+            Console.WriteLine("Something is wrong. Try again: " + e.Message);
         }
     }
 }
