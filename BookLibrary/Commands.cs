@@ -1,17 +1,16 @@
-﻿/*
+/*
 Add a book
 Remove a book by identifier
 Search for books by author
 Display books sorted by publication year
 Save data to a file and load data from a file
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
+using System.Text.Json;
 
 namespace BookLibrary
 {
-    public static class Options
+    public static class Commands
     {
         public static void AddBook(List<Book> listOfBooks, int identifier, string title, string author, int publicationYear)
         {
@@ -53,8 +52,14 @@ namespace BookLibrary
         {
             foreach (var book in books)
             {
-                Console.WriteLine($"{book.Identifier},{book.Title}, {book.Author}, {book.PublicationYear}");
+                Console.WriteLine($"{book.Identifier}, {book.Title}, {book.Author}, {book.PublicationYear}");
             }
+        }
+
+        public static void SaveBooksToFile(List<Book> listOfBooks, string filePath)
+        {
+            string jsonString = JsonSerializer.Serialize(listOfBooks, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, jsonString);
         }
     }
 }
