@@ -48,12 +48,16 @@ namespace BookLibrary
             return listOfBooks.OrderBy(book => book.PublicationYear).ToList();
         }
 
-        public static void DisplayBooks(List<Book> books)
+        public static List<string> DisplayBooks(List<Book> books)
         {
+            List<string> bookList = new List<string>();
+
             foreach (var book in books)
             {
-                Console.WriteLine($"{book.Identifier}, {book.Title}, {book.Author}, {book.PublicationYear}");
+                bookList.Add($"{book.Identifier}, {book.Title}, {book.Author}, {book.PublicationYear}");
             }
+
+            return bookList;
         }
 
         public static void SaveBooksToFile(List<Book> listOfBooks, string filePath)
