@@ -13,8 +13,7 @@ namespace BookLibrary
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error reading the file: " + e.Message);
-                return new List<Book>();
+                throw new FileReadException($"Error reading the file: {e.Message}");
             }
         }
     }
