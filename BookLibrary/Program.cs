@@ -10,7 +10,7 @@ class Program
 
         try
         {
-            List<Book> ListOfBooks = Read.LoadBooks(inputFilePath);
+            List<Book> ListOfBooks = FileManager.LoadBooksFromFile(inputFilePath);
 
             Console.WriteLine("You can do: \n1. Add a book\n2. Remove a book by identifier\n3. Search for books by author\n4. Display books sorted by publication year\n5. Save data to a file and load data from a file.\n");
 
@@ -29,7 +29,7 @@ class Program
 
                     try
                     {
-                        Commands.AddBook(ListOfBooks, Identifier, Title, Author, PublicationYear);
+                        BookManager.AddBook(ListOfBooks, Identifier, Title, Author, PublicationYear);
                         Console.WriteLine("Book is added. Everything is good!");
                     }
                     catch (Exception e)
@@ -43,9 +43,10 @@ class Program
 
                     try
                     {
-                        Commands.RemoveBookByIdentifier(ListOfBooks, Identifier);
+                        BookManager.RemoveBookByIdentifier(ListOfBooks, Identifier);
                         Console.WriteLine("Book is removed.");
-                        Commands.DisplayBooks(ListOfBooks);
+                        var bookList = BookLogger.DisplayBooks(ListOfBooks);
+                        bookList.ForEach(Console.WriteLine);
                     }
                     catch (Exception e)
                     {
@@ -56,17 +57,19 @@ class Program
                 {
                     string Author = Console.ReadLine();
 
-                    var FoundBooks = Commands.SearchForBooksByAuthor(ListOfBooks, Author);
-                    Commands.DisplayBooks(FoundBooks);
+                    var FoundBooks = BookManager.SearchForBooksByAuthor(ListOfBooks, Author);
+                    var bookList = BookLogger.DisplayBooks(FoundBooks);
+                    bookList.ForEach(Console.WriteLine);
                 }
                 else if (command == "4")
                 {
-                    var SortedBooks = Commands.SortedByPublicationYear(ListOfBooks);
-                    Commands.DisplayBooks(SortedBooks);
+                    var SortedBooks = BookManager.SortedByPublicationYear(ListOfBooks);
+                    var bookList = BookLogger.DisplayBooks(SortedBooks);
+                    bookList.ForEach(Console.WriteLine);
                 }
                 else if (command == "5")
                 {
-                    Commands.SaveBooksToFile(ListOfBooks, outputFilePath);
+                    FileManager.SaveBooksToFile(outputFilePath, ListOfBooks);
                     Console.WriteLine("Data saved to file.");
                 }
                 else
@@ -74,6 +77,10 @@ class Program
                     Console.WriteLine("Your command is incorrect. Please try again.");
                 }
             }
+        }
+        catch (FileReadException fre)
+        {
+            Console.WriteLine(fre.Message);
         }
         catch (Exception e)
         {
