@@ -29,7 +29,7 @@ class Program
 
                     try
                     {
-                        BookManager.AddBook(ListOfBooks, Identifier, Title, Author, PublicationYear);
+                        BookManager.Add(ListOfBooks, Identifier, Title, Author, PublicationYear);
                         Console.WriteLine("Book is added. Everything is good!");
                     }
                     catch (Exception e)
@@ -43,10 +43,9 @@ class Program
 
                     try
                     {
-                        BookManager.RemoveBookByIdentifier(ListOfBooks, Identifier);
+                        BookManager.RemoveById(ListOfBooks, Identifier);
                         Console.WriteLine("Book is removed.");
-                        var bookList = BookLogger.DisplayBooks(ListOfBooks);
-                        bookList.ForEach(Console.WriteLine);
+                        BookLogger.DisplayBooks(ListOfBooks);
                     }
                     catch (Exception e)
                     {
@@ -57,15 +56,13 @@ class Program
                 {
                     string Author = Console.ReadLine();
 
-                    var FoundBooks = BookManager.SearchForBooksByAuthor(ListOfBooks, Author);
-                    var bookList = BookLogger.DisplayBooks(FoundBooks);
-                    bookList.ForEach(Console.WriteLine);
+                    var FoundBooks = BookManager.SearchByAuthor(ListOfBooks, Author);
+                    BookLogger.DisplayBooks(FoundBooks);
                 }
                 else if (command == "4")
                 {
-                    var SortedBooks = BookManager.SortedByPublicationYear(ListOfBooks);
-                    var bookList = BookLogger.DisplayBooks(SortedBooks);
-                    bookList.ForEach(Console.WriteLine);
+                    var SortedBooks = BookManager.SortByPublicationDate(ListOfBooks);
+                    BookLogger.DisplayBooks(SortedBooks);
                 }
                 else if (command == "5")
                 {
