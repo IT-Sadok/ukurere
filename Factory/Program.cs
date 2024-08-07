@@ -1,4 +1,4 @@
-﻿namespace Factory
+namespace Factory
 {
     class Program
     {
@@ -9,14 +9,14 @@
 
             for (int i = 1; i <= 100; i++)
             {
-                int Id = i;
+                int id = i;
                 tasks.Add(Task.Run(async () =>
                 {
                     while (true)
                     {
-                        Console.WriteLine($"Machine {Id} is delivering parts...");
-                        await factory.DeliverAsync(Id);
-                        Console.WriteLine($"Machine {Id} delivered parts. Total parts: {factory.GetPartsCount()}");
+                        Console.WriteLine($"Machine {id} is delivering parts...");
+                        await factory.DeliverAsync(id);
+                        Console.WriteLine($"Machine {id} delivered parts. Total parts: {factory.Parts}");
 
                         await Task.Delay(new Random().Next(60));
                     }
@@ -25,14 +25,14 @@
 
             for (int i = 1; i <= 100; i++)
             {
-                int Id = i;
+                int id = i;
                 tasks.Add(Task.Run(async () =>
                 {
                     while (true)
                     {
-                        Console.WriteLine($"Machine {Id} is picking up products...");
-                        await factory.PickupAsync(Id);
-                        Console.WriteLine($"Machine {Id} picked up products. Remaining products: {factory.GetProductsCount()}");
+                        Console.WriteLine($"Machine {id} is picking up products...");
+                        await factory.PickupAsync(id);
+                        Console.WriteLine($"Machine {id} picked up products. Remaining products: {factory.Products}");
 
                         await Task.Delay(new Random().Next(60));
                     }
