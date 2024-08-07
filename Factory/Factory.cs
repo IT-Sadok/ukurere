@@ -1,39 +1,50 @@
-﻿namespace Factory
+namespace Factory
 {
     public class Factory
     {
-        private readonly SemaphoreSlim _deliverSemaphore = new SemaphoreSlim(100, 100);
-        private readonly SemaphoreSlim _pickupSemaphore = new SemaphoreSlim(100, 100);
+        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
         private int _parts = 0, _products = 0;
 
-        public async Task DeliverAsync(int Id)
+        public int Parts
         {
-            await _deliverSemaphore.WaitAsync();
+            get { return _parts; }
+            private set { _parts = value; }
+        }
+
+        public int Products
+        {
+            get { return _products; }
+            private set { _products = value; }
+        }
+
+        public async Task DeliverAsync(int id)
+        {
+            await _semaphore.WaitAsync();
             try
             {
                 await Task.Delay(100);
-                _parts++;
+                Parts++;
             }
             finally
             {
-                _deliverSemaphore.Release();
+                _semaphore.Release();
             }
         }
 
-        public async Task PickupAsync(int Id)
+        public async Task PickupAsync(int id)
         {
-            await _pickupSemaphore.WaitAsync();
+            await _semaphore.WaitAsync();
             try
             {
-                if (_products > 0)
+                if (Products > 0)
                 {
-                    await Task.Delay(100);
-                    _products--;
+                    await Task.Delay(100); 
+                    Products--;
                 }
             }
             finally
             {
-                _pickupSemaphore.Release();
+                _semaphore.Release();
             }
         }
 
@@ -42,22 +53,12 @@
             while (true)
             {
                 await Task.Delay(60);
-                if (_parts > 0)
+                if (Parts > 0)
                 {
-                    _parts--;
-                    _products++;
+                    Parts--;
+                    Products++;
                 }
             }
-        }
-
-        public int GetPartsCount()
-        {
-            return _parts;
-        }
-
-        public int GetProductsCount()
-        {
-            return _products;
         }
     }
 }
