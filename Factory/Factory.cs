@@ -5,17 +5,7 @@ namespace Factory
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
         private int _parts = 0, _products = 0;
 
-        public int Parts
-        {
-            get { return _parts; }
-            private set { _parts = value; }
-        }
-
-        public int Products
-        {
-            get { return _products; }
-            private set { _products = value; }
-        }
+        public int Parts, Products;
 
         public async Task DeliverAsync(int id)
         {
